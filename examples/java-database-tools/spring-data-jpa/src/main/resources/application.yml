@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:library}
+    username: ${POSTGRES_USER:usr}
+    password: ${POSTGRES_PASSWORD:pwd}
+  sql:
+    init:
+      # Property to enable DB initialization by using data.sql and schema.sql files
+      mode: always
+#      # Property to specify path for data script
+#      data-locations: data.sql
+#      # Property to specify path for schema script
+#      schema-locations: schema.sql
+  jpa:
+    hibernate:
+      # Property to enable ddl validation by Hibernate
+      ddl-auto: validate
+
+logging:
+  level:
+    org:
+      springframework:
+        transaction:
+          interceptor: TRACE
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+        SQL: DEBUG

@@ -1,0 +1,11 @@
+spring:
+  jackson:
+    default-property-inclusion: non_null
+
+logging:
+  level:
+    org.hibernate.resource.jdbc.internal.AbstractLogicalConnectionImplementor: trace
+    org.hibernate.event.internal.AbstractFlushingEventListener: trace
+    org.hibernate.internal.util.EntityPrinter: trace
+    org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl: trace
+    org.hibernate.internal.SessionImpl: trace

@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:library}
+    username: ${POSTGRES_USER:usr}
+    password: ${POSTGRES_PASSWORD:pwd}
+  sql:
+    init:
+      mode: always
+  jackson:
+    default-property-inclusion: non_null
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: debug
+    org.springframework.jdbc.support.JdbcTransactionManager: debug

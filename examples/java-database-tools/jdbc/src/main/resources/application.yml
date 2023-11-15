@@ -1,0 +1,15 @@
+application:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:library}
+    username: ${POSTGRES_USER:usr}
+    password: ${POSTGRES_PASSWORD:pwd}
+
+spring:
+  jackson:
+    default-property-inclusion: non_null
+
+logging:
+  level:
+    org.postgresql.Driver: DEBUG
+    org.postgresql.ds.common.BaseDataSource: DEBUG
+    org.postgresql.core.v3.QueryExecutorImpl: TRACE

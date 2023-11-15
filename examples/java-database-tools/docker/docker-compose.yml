@@ -1,0 +1,29 @@
+version: "3.8"
+
+# docker compose up --build
+services:
+
+  postgres:
+    image: postgres:${POSTGRES_VERSION}
+    hostname: postgres
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-usr}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pwd}
+      POSTGRES_DB: ${POSTGRES_DB:-library}
+
+  pgadmin:
+    image: dpage/pgadmin4:${PGADMIN_VERSION}
+    hostname: pgadmin
+    ports:
+      - ${PGADMIN_PORT:-9090}:80
+    depends_on:
+      - postgres
+    volumes:
+      - ./pgadmin4/servers.json:/pgadmin4/servers.json
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-adm@adm.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-adm}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
