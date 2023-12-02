@@ -1,7 +1,6 @@
 package edu.sandbox.javadatabasetools.springjdbc.repository;
 
-import edu.sandbox.javadatabasetools.springjdbc.core.resultsetextractors.BookMultipleResultSetExtractor;
-import edu.sandbox.javadatabasetools.springjdbc.core.resultsetextractors.BookSingleResultSetExtractor;
+import edu.sandbox.javadatabasetools.springjdbc.core.resultsetextractors.BookResultSetExtractor;
 import edu.sandbox.javadatabasetools.springjdbc.model.Book;
 import edu.sandbox.javadatabasetools.springjdbc.model.Comment;
 import edu.sandbox.javadatabasetools.springjdbc.model.Genre;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.Map.of;
 
@@ -26,39 +26,41 @@ public class BookRepository {
 
     public Set<Book> findAll() {
         return operations.query("""
-                select b.id    as book_id,
-                       b.title as book_title,
-                       a.id    as author_id,
-                       a.name  as author_name,
-                       c.id    as comment_id,
-                       c.text  as comment_text,
-                       g.id    as genre_id,
-                       g.name  as genre_name
-                from books b
-                         join authors a on a.id = b.author_id
-                         join comments c on b.id = c.book_id
-                         join books_genres bg on b.id = bg.book_id
-                         join genres g on g.id = bg.genre_id;
-                            """, new BookMultipleResultSetExtractor());
+                        select b.id    as book_id,
+                               b.title as book_title,
+                               a.id    as author_id,
+                               a.name  as author_name,
+                               c.id    as comment_id,
+                               c.text  as comment_text,
+                               g.id    as genre_id,
+                               g.name  as genre_name
+                        from books b
+                                 join authors a on a.id = b.author_id
+                                 join comments c on b.id = c.book_id
+                                 join books_genres bg on b.id = bg.book_id
+                                 join genres g on g.id = bg.genre_id;
+                                    """, new BookResultSetExtractor())
+                .collect(Collectors.toSet());
     }
 
     public Optional<Book> findById(long id) {
         return operations.query("""
-                select b.id    as book_id,
-                       b.title as book_title,
-                       a.id    as author_id,
-                       a.name  as author_name,
-                       c.id    as comment_id,
-                       c.text  as comment_text,
-                       g.id    as genre_id,
-                       g.name  as genre_name
-                from books b
-                         join authors a on a.id = b.author_id
-                         join comments c on b.id = c.book_id
-                         join books_genres bg on b.id = bg.book_id
-                         join genres g on g.id = bg.genre_id
-                where b.id = :id;
-                            """, of("id", id), new BookSingleResultSetExtractor());
+                        select b.id    as book_id,
+                               b.title as book_title,
+                               a.id    as author_id,
+                               a.name  as author_name,
+                               c.id    as comment_id,
+                               c.text  as comment_text,
+                               g.id    as genre_id,
+                               g.name  as genre_name
+                        from books b
+                                 join authors a on a.id = b.author_id
+                                 join comments c on b.id = c.book_id
+                                 join books_genres bg on b.id = bg.book_id
+                                 join genres g on g.id = bg.genre_id
+                        where b.id = :id;
+                                    """, of("id", id), new BookResultSetExtractor())
+                .findFirst();
     }
 
     public void create(Book book) {

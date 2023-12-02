@@ -1,15 +1,16 @@
 package edu.sandbox.javadatabasetools.jdbc.core.resultsetextractors.impl;
 
+import edu.sandbox.javadatabasetools.jdbc.core.resultsetextractors.ResultSetExtractor;
 import edu.sandbox.javadatabasetools.jdbc.model.Author;
 import edu.sandbox.javadatabasetools.jdbc.model.Book;
 import edu.sandbox.javadatabasetools.jdbc.model.Comment;
 import edu.sandbox.javadatabasetools.jdbc.model.Genre;
-import edu.sandbox.javadatabasetools.jdbc.core.resultsetextractors.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class BookResultSetExtractor implements ResultSetExtractor<Book> {
 
@@ -17,17 +18,16 @@ public class BookResultSetExtractor implements ResultSetExtractor<Book> {
     private final Map<Long, Genre> genreMap = new HashMap<>();
 
     @Override
-    public Book extract(ResultSet resultSet) throws SQLException {
-        Book book = null;
-        if (resultSet.next()) {
+    public Stream<Book> extract(ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
             var bookId = resultSet.getLong("book_id");
             if (bookMap.containsKey(bookId)) {
-                book = bookMap.get(bookId);
+                var book = bookMap.get(bookId);
 
                 extractComment(resultSet, book);
                 extractGenre(resultSet, book);
             } else {
-                book = new Book(bookId, resultSet.getString("book_title"));
+                var book = new Book(bookId, resultSet.getString("book_title"));
 
                 extractAuthor(resultSet, book);
                 extractComment(resultSet, book);
@@ -36,7 +36,7 @@ public class BookResultSetExtractor implements ResultSetExtractor<Book> {
                 bookMap.put(book.getId(), book);
             }
         }
-        return book;
+        return bookMap.values().stream();
     }
 
     private void extractAuthor(ResultSet resultSet, Book book) throws SQLException {

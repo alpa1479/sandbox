@@ -10,27 +10,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+import java.util.stream.Stream;
 
-import static java.util.Optional.ofNullable;
-
-public class BookSingleResultSetExtractor implements ResultSetExtractor<Optional<Book>> {
+public class BookResultSetExtractor implements ResultSetExtractor<Stream<Book>> {
 
     private final Map<Long, Book> bookMap = new HashMap<>();
     private final Map<Long, Genre> genreMap = new HashMap<>();
 
     @Override
-    public Optional<Book> extractData(ResultSet resultSet) throws SQLException {
-        Book book = null;
-        if (resultSet.next()) {
+    public Stream<Book> extractData(ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
             var bookId = resultSet.getLong("book_id");
             if (bookMap.containsKey(bookId)) {
-                book = bookMap.get(bookId);
+                var book = bookMap.get(bookId);
 
                 extractComment(resultSet, book);
                 extractGenre(resultSet, book);
             } else {
-                book = new Book(bookId, resultSet.getString("book_title"));
+                var book = new Book(bookId, resultSet.getString("book_title"));
 
                 extractAuthor(resultSet, book);
                 extractComment(resultSet, book);
@@ -39,7 +36,7 @@ public class BookSingleResultSetExtractor implements ResultSetExtractor<Optional
                 bookMap.put(book.getId(), book);
             }
         }
-        return ofNullable(book);
+        return bookMap.values().stream();
     }
 
     private void extractAuthor(ResultSet resultSet, Book book) throws SQLException {

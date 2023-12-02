@@ -4,31 +4,29 @@ import edu.sandbox.javadatabasetools.jdbc.exception.DatabaseOperationException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toSet;
 
 public interface ResultSetExtractor<T> {
 
-    T extract(ResultSet resultSet) throws SQLException;
+    Stream<T> extract(ResultSet resultSet) throws SQLException;
 
     default Optional<T> extractSingle(ResultSet resultSet) {
-        try {
-            return Optional.ofNullable(extract(resultSet));
-        } catch (SQLException e) {
-            throw new DatabaseOperationException(e);
-        }
+        return extractAndWrapException(resultSet).findFirst();
     }
 
     default Set<T> extractMultiple(ResultSet resultSet) {
-        Set<T> items = new LinkedHashSet<>();
-        var item = extractSingle(resultSet);
-        var next = item.isPresent();
-        while (next) {
-            items.add(item.get());
-            item = extractSingle(resultSet);
-            next = item.isPresent();
+        return extractAndWrapException(resultSet).collect(toSet());
+    }
+
+    private Stream<T> extractAndWrapException(ResultSet resultSet) {
+        try {
+            return extract(resultSet);
+        } catch (SQLException e) {
+            throw new DatabaseOperationException(e);
         }
-        return items;
     }
 }
