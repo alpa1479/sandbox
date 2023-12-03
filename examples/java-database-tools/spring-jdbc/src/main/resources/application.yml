@@ -1,8 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:library}
+    url: jdbc:log4jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:library}
     username: ${POSTGRES_USER:usr}
     password: ${POSTGRES_PASSWORD:pwd}
+    driver-class-name: net.sf.log4jdbc.DriverSpy
   sql:
     init:
       mode: always
@@ -10,6 +11,17 @@ spring:
     default-property-inclusion: non_null
 
 logging:
+  pattern:
+    console: "%clr(%-5level) %white([%thread]) %cyan(%logger{36}): %msg%n"
   level:
-    org.springframework.jdbc.core.JdbcTemplate: debug
+    # Spring JDBC loggers
+#    org.springframework.jdbc.core.JdbcTemplate: debug
     org.springframework.jdbc.support.JdbcTransactionManager: debug
+
+    # Log4JDBC loggers
+    jdbc.audit: error
+    jdbc.resultset: error
+    jdbc.sqltiming: error
+    jdbc.connection: error
+    log4jdbc.debug: trace
+    jdbc.sqlonly: info
