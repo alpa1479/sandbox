@@ -30,6 +30,7 @@ allprojects {
     val springShellStarter: String by project
     val hibernate: String by project
     val log4jdbcRemix: String by project
+    val datasourceProxy: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -41,6 +42,7 @@ allprojects {
             dependency("org.springframework.shell:spring-shell-starter:$springShellStarter")
             dependency("org.hibernate:hibernate-core:$hibernate")
             dependency("org.lazyluke:log4jdbc-remix:$log4jdbcRemix")
+            dependency("net.ttddyy:datasource-proxy:$datasourceProxy")
         }
     }
 

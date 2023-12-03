@@ -17,14 +17,10 @@ spring:
       ddl-auto: validate
 
 logging:
+  pattern:
+    console: "%clr(%-5level) %white([%thread]) %cyan(%logger{36}): %msg%n"
   level:
-    org:
-      springframework:
-        transaction:
-          interceptor: TRACE
-      hibernate:
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
-        SQL: DEBUG
+    # Spring and Hibernate loggers
+    org.springframework.transaction.interceptor: trace
+#    org.hibernate.type.descriptor.sql.BasicBinder: trace
+#    org.hibernate.SQL: debug

@@ -13,7 +13,7 @@ public class JsonPrettyFormatter {
 
     public <T> String format(T object) {
         try {
-            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+            return mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

@@ -4,6 +4,7 @@ dependencies {
     implementation("org.springframework.shell:spring-shell-starter")
 
     implementation("org.postgresql:postgresql")
+    implementation("net.ttddyy:datasource-proxy")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
