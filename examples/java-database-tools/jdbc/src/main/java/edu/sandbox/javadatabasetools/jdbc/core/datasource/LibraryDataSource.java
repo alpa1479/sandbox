@@ -1,6 +1,7 @@
 package edu.sandbox.javadatabasetools.jdbc.core.datasource;
 
 import edu.sandbox.javadatabasetools.jdbc.config.properties.DataSourceProperties;
+import net.sf.log4jdbc.ConnectionSpy;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +37,7 @@ public class LibraryDataSource implements DataSource {
     public Connection getConnection() throws SQLException {
         var connection = source.getConnection();
         connection.setAutoCommit(false);
+        connection = new ConnectionSpy(connection);
         return connection;
     }
 
@@ -43,6 +45,7 @@ public class LibraryDataSource implements DataSource {
     public Connection getConnection(String username, String password) throws SQLException {
         var connection = source.getConnection(username, password);
         connection.setAutoCommit(false);
+        connection = new ConnectionSpy(connection);
         return connection;
     }
 

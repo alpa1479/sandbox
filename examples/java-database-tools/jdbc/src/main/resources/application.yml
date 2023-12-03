@@ -9,7 +9,19 @@ spring:
     default-property-inclusion: non_null
 
 logging:
+  pattern:
+    console: "%clr(%-5level) %white([%thread]) %cyan(%logger{36}): %msg%n"
   level:
+    # Driver loggers
     org.postgresql.Driver: DEBUG
-    org.postgresql.ds.common.BaseDataSource: DEBUG
-    org.postgresql.core.v3.QueryExecutorImpl: TRACE
+#    org.postgresql.ds.common.BaseDataSource: DEBUG
+#    org.postgresql.core.v3.QueryExecutorImpl: TRACE
+
+    # Log4JDBC-Remix loggers
+    jdbc.audit: error
+    jdbc.resultset: error
+    jdbc.sqltiming: error
+    jdbc.connection: error
+    log4jdbc.debug: trace
+    jdbc.resultsettable: trace
+    jdbc.sqlonly: info

@@ -1,7 +1,7 @@
 package edu.sandbox.javadatabasetools.jdbc.core.executor;
 
-import edu.sandbox.javadatabasetools.jdbc.exception.DatabaseOperationException;
 import edu.sandbox.javadatabasetools.jdbc.core.resultsetextractors.ResultSetExtractor;
+import edu.sandbox.javadatabasetools.jdbc.exception.DatabaseOperationException;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;

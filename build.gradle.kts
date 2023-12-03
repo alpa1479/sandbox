@@ -29,6 +29,7 @@ allprojects {
     val lombok: String by project
     val springShellStarter: String by project
     val hibernate: String by project
+    val log4jdbcRemix: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -39,6 +40,7 @@ allprojects {
             dependency("org.projectlombok:lombok:$lombok")
             dependency("org.springframework.shell:spring-shell-starter:$springShellStarter")
             dependency("org.hibernate:hibernate-core:$hibernate")
+            dependency("org.lazyluke:log4jdbc-remix:$log4jdbcRemix")
         }
     }
 
