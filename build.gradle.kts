@@ -31,6 +31,7 @@ allprojects {
     val hibernate: String by project
     val log4jdbcRemix: String by project
     val datasourceProxy: String by project
+    val p6spy: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -43,6 +44,7 @@ allprojects {
             dependency("org.hibernate:hibernate-core:$hibernate")
             dependency("org.lazyluke:log4jdbc-remix:$log4jdbcRemix")
             dependency("net.ttddyy:datasource-proxy:$datasourceProxy")
+            dependency("p6spy:p6spy:$p6spy")
         }
     }
 

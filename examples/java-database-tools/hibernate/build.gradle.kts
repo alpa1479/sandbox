@@ -5,6 +5,7 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.hibernate.orm:hibernate-core")
     implementation("org.postgresql:postgresql")
+    implementation("p6spy:p6spy")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")

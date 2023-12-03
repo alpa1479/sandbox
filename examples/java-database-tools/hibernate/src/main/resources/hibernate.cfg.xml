@@ -6,11 +6,15 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/library</property>
+        <property name="hibernate.connection.url">jdbc:p6spy:postgresql://localhost:5432/library</property>
         <property name="hibernate.connection.username">usr</property>
         <property name="hibernate.connection.password">pwd</property>
+        <property name="hibernate.connection.driver_class">com.p6spy.engine.spy.P6SpyDriver</property>
 
-        <property name="hibernate.show_sql">true</property>
+        <!-- Same will be logged from org.hibernate.SQL logger -->
+<!--        <property name="hibernate.show_sql">true</property>-->
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.use_sql_comments">true</property>
         <property name="hibernate.generate_statistics">true</property>
 
         <property name="hibernate.hbm2ddl.auto">validate</property>
