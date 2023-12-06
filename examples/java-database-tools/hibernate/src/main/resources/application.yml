@@ -13,7 +13,8 @@ logging:
 #    org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl: trace
 #    org.hibernate.internal.SessionImpl: trace
 #    org.hibernate.SQL: debug
-#    org.hibernate.type: trace
+#    org.hibernate.orm.jdbc.bind: trace
+#    org.hibernate.orm.jdbc.extract: trace
 #    org.hibernate.hql.ast.AST: info
 #    org.hibernate.tool.hbm2ddl: warn
 #    org.hibernate.hql: debug
