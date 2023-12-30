@@ -1,0 +1,21 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="[Postgres]" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+    <deployment type="docker-compose.yml">
+      <settings>
+        <option name="envFilePath" value="" />
+        <option name="removeVolumesOnComposeDown" value="true" />
+        <option name="services">
+          <list>
+            <option value="postgres" />
+          </list>
+        </option>
+        <option name="sourceFilePath" value="examples/docker/docker-compose.yml" />
+        <option name="upDetach" value="false" />
+        <option name="upForceRecreate" value="true" />
+        <option name="upRenewAnonVolumes" value="true" />
+        <option name="upTimeout" value="30" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>
