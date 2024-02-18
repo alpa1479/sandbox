@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:library}
+    username: ${POSTGRES_USER:usr}
+    password: ${POSTGRES_PASSWORD:pwd}
+  sql:
+    init:
+      mode: always
+  jackson:
+    default-property-inclusion: non_null
+
+logging:
+  pattern:
+    console: "%clr(%-5level) %white([%thread]) %cyan(%logger{36}): %msg%n"
+  level:
+    org.jooq.tools.LoggerListener: debug
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
