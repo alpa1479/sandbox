@@ -32,6 +32,7 @@ allprojects {
     val log4jdbcRemix: String by project
     val datasourceProxy: String by project
     val p6spy: String by project
+    val myBatisStarter: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -41,6 +42,7 @@ allprojects {
             }
             dependency("org.projectlombok:lombok:$lombok")
             dependency("org.springframework.shell:spring-shell-starter:$springShellStarter")
+            dependency("org.mybatis.spring.boot:mybatis-spring-boot-starter:$myBatisStarter")
             dependency("org.hibernate:hibernate-core:$hibernate")
             dependency("org.lazyluke:log4jdbc-remix:$log4jdbcRemix")
             dependency("net.ttddyy:datasource-proxy:$datasourceProxy")
