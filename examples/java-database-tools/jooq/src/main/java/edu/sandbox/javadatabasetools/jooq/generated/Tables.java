@@ -4,11 +4,11 @@
 package edu.sandbox.javadatabasetools.jooq.generated;
 
 
-import edu.sandbox.javadatabasetools.jooq.generated.tables.Author;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.Book;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.BookGenre;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.Comment;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.Genre;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.Authors;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.Books;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.BooksGenres;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.Comments;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.Genres;
 
 
 /**
@@ -20,25 +20,25 @@ public class Tables {
     /**
      * The table <code>public.authors</code>.
      */
-    public static final Author AUTHORS = Author.AUTHOR;
+    public static final Authors AUTHORS = Authors.AUTHORS;
 
     /**
      * The table <code>public.books</code>.
      */
-    public static final Book BOOKS = Book.BOOK;
+    public static final Books BOOKS = Books.BOOKS;
 
     /**
      * The table <code>public.books_genres</code>.
      */
-    public static final BookGenre BOOKS_GENRES = BookGenre.BOOK_GENRE;
+    public static final BooksGenres BOOKS_GENRES = BooksGenres.BOOKS_GENRES;
 
     /**
      * The table <code>public.comments</code>.
      */
-    public static final Comment COMMENTS = Comment.COMMENT;
+    public static final Comments COMMENTS = Comments.COMMENTS;
 
     /**
      * The table <code>public.genres</code>.
      */
-    public static final Genre GENRES = Genre.GENRE;
+    public static final Genres GENRES = Genres.GENRES;
 }

@@ -42,8 +42,7 @@ public class BookResultSetExtractor implements ResultSetExtractor<Book> {
     private void extractAuthor(ResultSet resultSet, Book book) throws SQLException {
         var author = new Author(
                 resultSet.getLong("author_id"),
-                resultSet.getString("author_name"),
-                book
+                resultSet.getString("author_name")
         );
         book.setAuthor(author);
     }
@@ -51,10 +50,9 @@ public class BookResultSetExtractor implements ResultSetExtractor<Book> {
     private void extractComment(ResultSet resultSet, Book book) throws SQLException {
         var comment = new Comment(
                 resultSet.getLong("comment_id"),
-                resultSet.getString("comment_text"),
-                book
+                resultSet.getString("comment_text")
         );
-        book.addComment(comment);
+        addCommentIfMissing(book, comment);
     }
 
     private void extractGenre(ResultSet resultSet, Book book) throws SQLException {
@@ -68,7 +66,30 @@ public class BookResultSetExtractor implements ResultSetExtractor<Book> {
                     resultSet.getString("genre_name")
             );
         }
-        genre.addBook(book);
-        book.addGenre(genre);
+        addGenreIfMissing(book, genre);
+    }
+
+    private void addCommentIfMissing(Book book, Comment comment) {
+        var comments = book.getComments();
+
+        var notContains = comments
+                .stream()
+                .noneMatch(c -> c.id().equals(comment.id()));
+
+        if (notContains) {
+            comments.add(comment);
+        }
+    }
+
+    private void addGenreIfMissing(Book book, Genre genre) {
+        var genres = book.getGenres();
+
+        var notContains = genres
+                .stream()
+                .noneMatch(g -> g.id().equals(genre.id()));
+
+        if (notContains) {
+            genres.add(genre);
+        }
     }
 }

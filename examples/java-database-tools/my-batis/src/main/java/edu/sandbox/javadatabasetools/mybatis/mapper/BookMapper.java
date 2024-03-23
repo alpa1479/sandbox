@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import java.util.Set;
+import java.util.List;
 
 @Mapper
 public interface BookMapper {
@@ -31,7 +31,7 @@ public interface BookMapper {
             @Result(property = "author.id", column = "author_id"),
             @Result(property = "author.name", column = "author_name")
     })
-    Set<Book> findAll();
+    List<Book> findAll();
 
     @Select("""
             select

@@ -1,0 +1,3 @@
+logging:
+  level:
+    edu.sandbox.javadatabasetools.mybatis.mapper: debug

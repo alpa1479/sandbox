@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="SpringDataJpaDemo" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="ACTIVE_PROFILES" value="local" />
     <module name="sandbox.examples.java-database-tools.spring-data-jpa.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="edu.sandbox.javadatabasetools.springdatajpa.SpringDataJpaDemo" />
     <method v="2">

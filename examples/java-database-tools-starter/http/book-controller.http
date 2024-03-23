@@ -1,0 +1,54 @@
+### Find all books
+GET http://localhost:8080/api/v1/books
+
+### Find book by id
+GET http://localhost:8080/api/v1/books/2
+
+### Create new book
+POST http://localhost:8080/api/v1/books
+Content-Type: application/json
+
+{
+  "title": "new-book",
+  "author": {
+    "name": "new-author"
+  },
+  "comments": [
+    {
+      "text": "new-comment"
+    }
+  ],
+  "genres": [
+    {
+      "name": "new-genre"
+    }
+  ]
+}
+
+### Update existing book
+PUT http://localhost:8080/api/v1/books
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "changed-title",
+  "author": {
+    "id": 2,
+    "name": "changed-name"
+  },
+  "comments": [
+    {
+      "id": 3,
+      "text": "changed-text"
+    }
+  ],
+  "genres": [
+    {
+      "id": 3,
+      "name": "changed-name"
+    }
+  ]
+}
+
+### Delete book by id
+DELETE http://localhost:8080/api/v1/books/2

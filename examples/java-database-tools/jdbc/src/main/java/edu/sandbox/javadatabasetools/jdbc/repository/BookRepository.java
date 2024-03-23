@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +19,7 @@ public class BookRepository {
 
     private final DatabaseOperations operations;
 
-    public Set<Book> findAll(Connection connection) {
+    public List<Book> findAll(Connection connection) {
         return operations.selectMultiple(connection, new BookResultSetExtractor(), """
                 select b.id    as book_id,
                        b.title as book_title,
@@ -58,7 +57,7 @@ public class BookRepository {
     }
 
     public void create(Book book, Connection connection) {
-        var authorName = book.getAuthor().getName();
+        var authorName = book.getAuthor().name();
         var authorId = operations.execute(connection, "insert into authors (name) values (?)", authorName);
 
         var title = book.getTitle();
@@ -66,13 +65,13 @@ public class BookRepository {
 
         var comments = book.getComments();
         for (Comment comment : comments) {
-            operations.execute(connection, "insert into comments (text, book_id) values (?, ?)", comment.getText(), bookId);
+            operations.execute(connection, "insert into comments (text, book_id) values (?, ?)", comment.text(), bookId);
         }
 
         List<Long> genreIds = new ArrayList<>();
         var genres = book.getGenres();
         for (Genre genre : genres) {
-            var genreId = operations.execute(connection, "insert into genres (name) values (?)", genre.getName());
+            var genreId = operations.execute(connection, "insert into genres (name) values (?)", genre.name());
             genreIds.add(genreId);
         }
 
@@ -82,8 +81,8 @@ public class BookRepository {
     }
 
     public void update(Book book, Connection connection) {
-        var authorId = book.getAuthor().getId();
-        var authorName = book.getAuthor().getName();
+        var authorId = book.getAuthor().id();
+        var authorName = book.getAuthor().name();
         operations.execute(connection, "update authors set name = ? where id = ?", authorName, authorId);
 
         var bookId = book.getId();
@@ -92,12 +91,12 @@ public class BookRepository {
 
         var comments = book.getComments();
         for (Comment comment : comments) {
-            operations.execute(connection, "update comments set text = ? where id = ?", comment.getText(), comment.getId());
+            operations.execute(connection, "update comments set text = ? where id = ?", comment.text(), comment.id());
         }
 
         var genres = book.getGenres();
         for (Genre genre : genres) {
-            operations.execute(connection, "update genres set name = ? where id = ?", genre.getName(), genre.getId());
+            operations.execute(connection, "update genres set name = ? where id = ?", genre.name(), genre.id());
         }
     }
 

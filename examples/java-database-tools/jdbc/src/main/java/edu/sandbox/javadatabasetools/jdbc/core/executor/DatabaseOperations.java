@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.BiFunction;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
@@ -32,11 +31,11 @@ public class DatabaseOperations {
         return doSelectSingle(connection, resultSetExtractor, sql, null);
     }
 
-    public <T> Set<T> selectMultiple(Connection connection, ResultSetExtractor<T> resultSetExtractor, String sql, Object... params) {
+    public <T> List<T> selectMultiple(Connection connection, ResultSetExtractor<T> resultSetExtractor, String sql, Object... params) {
         return doSelectMultiple(connection, resultSetExtractor, sql, Arrays.asList(params));
     }
 
-    public <T> Set<T> selectMultiple(Connection connection, ResultSetExtractor<T> resultSetExtractor, String sql) {
+    public <T> List<T> selectMultiple(Connection connection, ResultSetExtractor<T> resultSetExtractor, String sql) {
         return doSelectMultiple(connection, resultSetExtractor, sql, null);
     }
 
@@ -44,7 +43,7 @@ public class DatabaseOperations {
         return doSelect(connection, resultSetExtractor, ResultSetExtractor::extractSingle, sql, params);
     }
 
-    private <T> Set<T> doSelectMultiple(Connection connection, ResultSetExtractor<T> resultSetExtractor, String sql, List<Object> params) {
+    private <T> List<T> doSelectMultiple(Connection connection, ResultSetExtractor<T> resultSetExtractor, String sql, List<Object> params) {
         return doSelect(connection, resultSetExtractor, ResultSetExtractor::extractMultiple, sql, params);
     }
 

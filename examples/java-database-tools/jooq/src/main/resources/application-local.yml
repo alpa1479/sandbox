@@ -1,0 +1,4 @@
+logging:
+  level:
+    org.jooq.tools.LoggerListener: debug
+    org.springframework.jdbc.support.JdbcTransactionManager: debug

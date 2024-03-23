@@ -4,16 +4,16 @@
 package edu.sandbox.javadatabasetools.jooq.generated;
 
 
-import edu.sandbox.javadatabasetools.jooq.generated.tables.Author;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.Book;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.BookGenre;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.Comment;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.Genre;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.records.AuthorRecord;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.records.BookGenreRecord;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.records.BookRecord;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.records.CommentRecord;
-import edu.sandbox.javadatabasetools.jooq.generated.tables.records.GenreRecord;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.Authors;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.Books;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.BooksGenres;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.Comments;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.Genres;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.records.AuthorsRecord;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.records.BooksGenresRecord;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.records.BooksRecord;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.records.CommentsRecord;
+import edu.sandbox.javadatabasetools.jooq.generated.tables.records.GenresRecord;
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -32,20 +32,20 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<AuthorRecord> AUTHORS_PKEY = Internal.createUniqueKey(Author.AUTHOR, DSL.name("authors_pkey"), new TableField[]{Author.AUTHOR.ID}, true);
-    public static final UniqueKey<BookRecord> BOOKS_AUTHOR_ID_KEY = Internal.createUniqueKey(Book.BOOK, DSL.name("books_author_id_key"), new TableField[]{Book.BOOK.AUTHOR_ID}, true);
-    public static final UniqueKey<BookRecord> BOOKS_PKEY = Internal.createUniqueKey(Book.BOOK, DSL.name("books_pkey"), new TableField[]{Book.BOOK.ID}, true);
-    public static final UniqueKey<BookGenreRecord> BOOKS_GENRES_BOOK_ID_GENRE_ID_KEY = Internal.createUniqueKey(BookGenre.BOOK_GENRE, DSL.name("books_genres_book_id_genre_id_key"), new TableField[]{BookGenre.BOOK_GENRE.BOOK_ID, BookGenre.BOOK_GENRE.GENRE_ID}, true);
-    public static final UniqueKey<BookGenreRecord> BOOKS_GENRES_PKEY = Internal.createUniqueKey(BookGenre.BOOK_GENRE, DSL.name("books_genres_pkey"), new TableField[]{BookGenre.BOOK_GENRE.ID}, true);
-    public static final UniqueKey<CommentRecord> COMMENTS_PKEY = Internal.createUniqueKey(Comment.COMMENT, DSL.name("comments_pkey"), new TableField[]{Comment.COMMENT.ID}, true);
-    public static final UniqueKey<GenreRecord> GENRES_PKEY = Internal.createUniqueKey(Genre.GENRE, DSL.name("genres_pkey"), new TableField[]{Genre.GENRE.ID}, true);
+    public static final UniqueKey<AuthorsRecord> AUTHORS_PKEY = Internal.createUniqueKey(Authors.AUTHORS, DSL.name("authors_pkey"), new TableField[]{Authors.AUTHORS.ID}, true);
+    public static final UniqueKey<BooksRecord> BOOKS_AUTHOR_ID_KEY = Internal.createUniqueKey(Books.BOOKS, DSL.name("books_author_id_key"), new TableField[]{Books.BOOKS.AUTHOR_ID}, true);
+    public static final UniqueKey<BooksRecord> BOOKS_PKEY = Internal.createUniqueKey(Books.BOOKS, DSL.name("books_pkey"), new TableField[]{Books.BOOKS.ID}, true);
+    public static final UniqueKey<BooksGenresRecord> BOOKS_GENRES_BOOK_ID_GENRE_ID_KEY = Internal.createUniqueKey(BooksGenres.BOOKS_GENRES, DSL.name("books_genres_book_id_genre_id_key"), new TableField[]{BooksGenres.BOOKS_GENRES.BOOK_ID, BooksGenres.BOOKS_GENRES.GENRE_ID}, true);
+    public static final UniqueKey<BooksGenresRecord> BOOKS_GENRES_PKEY = Internal.createUniqueKey(BooksGenres.BOOKS_GENRES, DSL.name("books_genres_pkey"), new TableField[]{BooksGenres.BOOKS_GENRES.ID}, true);
+    public static final UniqueKey<CommentsRecord> COMMENTS_PKEY = Internal.createUniqueKey(Comments.COMMENTS, DSL.name("comments_pkey"), new TableField[]{Comments.COMMENTS.ID}, true);
+    public static final UniqueKey<GenresRecord> GENRES_PKEY = Internal.createUniqueKey(Genres.GENRES, DSL.name("genres_pkey"), new TableField[]{Genres.GENRES.ID}, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<BookRecord, AuthorRecord> BOOKS__BOOKS_AUTHOR_ID_FKEY = Internal.createForeignKey(Book.BOOK, DSL.name("books_author_id_fkey"), new TableField[]{Book.BOOK.AUTHOR_ID}, Keys.AUTHORS_PKEY, new TableField[]{Author.AUTHOR.ID}, true);
-    public static final ForeignKey<BookGenreRecord, BookRecord> BOOKS_GENRES__BOOKS_GENRES_BOOK_ID_FKEY = Internal.createForeignKey(BookGenre.BOOK_GENRE, DSL.name("books_genres_book_id_fkey"), new TableField[]{BookGenre.BOOK_GENRE.BOOK_ID}, Keys.BOOKS_PKEY, new TableField[]{Book.BOOK.ID}, true);
-    public static final ForeignKey<BookGenreRecord, GenreRecord> BOOKS_GENRES__BOOKS_GENRES_GENRE_ID_FKEY = Internal.createForeignKey(BookGenre.BOOK_GENRE, DSL.name("books_genres_genre_id_fkey"), new TableField[]{BookGenre.BOOK_GENRE.GENRE_ID}, Keys.GENRES_PKEY, new TableField[]{Genre.GENRE.ID}, true);
-    public static final ForeignKey<CommentRecord, BookRecord> COMMENTS__COMMENTS_BOOK_ID_FKEY = Internal.createForeignKey(Comment.COMMENT, DSL.name("comments_book_id_fkey"), new TableField[]{Comment.COMMENT.BOOK_ID}, Keys.BOOKS_PKEY, new TableField[]{Book.BOOK.ID}, true);
+    public static final ForeignKey<BooksRecord, AuthorsRecord> BOOKS__BOOKS_AUTHOR_ID_FKEY = Internal.createForeignKey(Books.BOOKS, DSL.name("books_author_id_fkey"), new TableField[]{Books.BOOKS.AUTHOR_ID}, Keys.AUTHORS_PKEY, new TableField[]{Authors.AUTHORS.ID}, true);
+    public static final ForeignKey<BooksGenresRecord, BooksRecord> BOOKS_GENRES__BOOKS_GENRES_BOOK_ID_FKEY = Internal.createForeignKey(BooksGenres.BOOKS_GENRES, DSL.name("books_genres_book_id_fkey"), new TableField[]{BooksGenres.BOOKS_GENRES.BOOK_ID}, Keys.BOOKS_PKEY, new TableField[]{Books.BOOKS.ID}, true);
+    public static final ForeignKey<BooksGenresRecord, GenresRecord> BOOKS_GENRES__BOOKS_GENRES_GENRE_ID_FKEY = Internal.createForeignKey(BooksGenres.BOOKS_GENRES, DSL.name("books_genres_genre_id_fkey"), new TableField[]{BooksGenres.BOOKS_GENRES.GENRE_ID}, Keys.GENRES_PKEY, new TableField[]{Genres.GENRES.ID}, true);
+    public static final ForeignKey<CommentsRecord, BooksRecord> COMMENTS__COMMENTS_BOOK_ID_FKEY = Internal.createForeignKey(Comments.COMMENTS, DSL.name("comments_book_id_fkey"), new TableField[]{Comments.COMMENTS.BOOK_ID}, Keys.BOOKS_PKEY, new TableField[]{Books.BOOKS.ID}, true);
 }

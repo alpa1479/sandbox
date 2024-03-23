@@ -27,6 +27,7 @@ allprojects {
     }
 
     val lombok: String by project
+    val mapStruct: String by project
     val springShellStarter: String by project
     val hibernate: String by project
     val log4jdbcRemix: String by project
@@ -41,6 +42,8 @@ allprojects {
                 mavenBom(BOM_COORDINATES)
             }
             dependency("org.projectlombok:lombok:$lombok")
+            dependency("org.mapstruct:mapstruct:$mapStruct")
+            dependency("org.mapstruct:mapstruct-processor:$mapStruct")
             dependency("org.springframework.shell:spring-shell-starter:$springShellStarter")
             dependency("org.mybatis.spring.boot:mybatis-spring-boot-starter:$myBatisStarter")
             dependency("org.hibernate:hibernate-core:$hibernate")
@@ -58,7 +61,7 @@ allprojects {
 }
 
 subprojects {
-    plugins.apply(JavaPlugin::class.java)
+    plugins.apply(JavaLibraryPlugin::class.java)
     extensions.configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21

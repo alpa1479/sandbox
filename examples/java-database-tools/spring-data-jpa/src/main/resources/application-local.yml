@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    hibernate:
+      # Property to enable ddl validation by Hibernate
+      ddl-auto: validate
+
+logging:
+  level:
+    # Spring and Hibernate loggers
+    org.springframework.transaction.interceptor: trace
+#    org.hibernate.type.descriptor.sql.BasicBinder: trace
+#    org.hibernate.SQL: debug

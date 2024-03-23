@@ -1,6 +1,5 @@
 package edu.sandbox.javadatabasetools.springdatajdbc.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -21,10 +20,6 @@ public class Author implements Persistable<Long> {
 
     @Transient
     private final boolean isNew;
-
-    @Transient
-    @JsonBackReference
-    private Book book;
 
     @PersistenceCreator
     public Author(Long id, String name) {

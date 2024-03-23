@@ -1,6 +1,5 @@
 package edu.sandbox.javadatabasetools.springdatajdbc.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -13,7 +12,8 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Getter
 @Setter
@@ -32,15 +32,12 @@ public class Book implements Persistable<Long> {
     private AggregateReference<Author, Long> authorReference;
 
     @Transient
-    @JsonManagedReference
     private Author author;
 
     @Transient
-    @JsonManagedReference
     private List<Comment> comments = new ArrayList<>();
 
     @Transient
-    @JsonManagedReference
     private List<Genre> genres = new ArrayList<>();
 
     @PersistenceCreator
@@ -64,18 +61,10 @@ public class Book implements Persistable<Long> {
         }
     }
 
-    public void addComment(Comment comment) {
-        comments.add(comment);
-    }
-
-    public void addGenre(Genre genre) {
-        genres.add(genre);
-    }
-
-    public boolean hasGenre(Genre targetGenre) {
-        return genres.stream()
-                .map(Genre::getId)
-                .filter(Objects::nonNull)
-                .anyMatch(id -> id.equals(targetGenre.getId()));
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+        if (!isEmpty(comments)) {
+            comments.forEach(comment -> comment.setBook(this));
+        }
     }
 }

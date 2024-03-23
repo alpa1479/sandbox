@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Map.of;
@@ -24,7 +23,7 @@ public class BookRepository {
 
     private final NamedParameterJdbcOperations operations;
 
-    public Set<Book> findAll() {
+    public List<Book> findAll() {
         return operations.query("""
                         select b.id    as book_id,
                                b.title as book_title,
@@ -40,7 +39,7 @@ public class BookRepository {
                                  join books_genres bg on b.id = bg.book_id
                                  join genres g on g.id = bg.genre_id;
                                     """, new BookResultSetExtractor())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     public Optional<Book> findById(long id) {
@@ -66,7 +65,7 @@ public class BookRepository {
     public void create(Book book) {
         var keyHolder = new GeneratedKeyHolder();
 
-        var authorName = book.getAuthor().getName();
+        var authorName = book.getAuthor().name();
         operations.update("insert into authors (name) values (:name)",
                 new MapSqlParameterSource(of("name", authorName)), keyHolder, new String[]{"id"});
         var authorId = keyHolder.getKey().longValue();
@@ -79,13 +78,13 @@ public class BookRepository {
         var comments = book.getComments();
         for (Comment comment : comments) {
             operations.update("insert into comments (text, book_id) values (:text, :book_id)",
-                    of("text", comment.getText(), "book_id", bookId));
+                    of("text", comment.text(), "book_id", bookId));
         }
 
         List<Long> genreIds = new ArrayList<>();
         var genres = book.getGenres();
         for (Genre genre : genres) {
-            operations.update("insert into genres (name) values (:name)", new MapSqlParameterSource(of("name", genre.getName())), keyHolder, new String[]{"id"});
+            operations.update("insert into genres (name) values (:name)", new MapSqlParameterSource(of("name", genre.name())), keyHolder, new String[]{"id"});
             genreIds.add(keyHolder.getKey().longValue());
         }
 
@@ -96,8 +95,8 @@ public class BookRepository {
     }
 
     public void update(Book book) {
-        var authorId = book.getAuthor().getId();
-        var authorName = book.getAuthor().getName();
+        var authorId = book.getAuthor().id();
+        var authorName = book.getAuthor().name();
         operations.update("update authors set name = :name where id = :id", of("name", authorName, "id", authorId));
 
         var bookId = book.getId();
@@ -106,12 +105,12 @@ public class BookRepository {
 
         var comments = book.getComments();
         for (Comment comment : comments) {
-            operations.update("update comments set text = :text where id = :id", of("text", comment.getText(), "id", comment.getId()));
+            operations.update("update comments set text = :text where id = :id", of("text", comment.text(), "id", comment.id()));
         }
 
         var genres = book.getGenres();
         for (Genre genre : genres) {
-            operations.update("update genres set name = :name where id = :id", of("name", genre.getName(), "id", genre.getId()));
+            operations.update("update genres set name = :name where id = :id", of("name", genre.name(), "id", genre.id()));
         }
     }
 

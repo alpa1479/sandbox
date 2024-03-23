@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:library}
+    username: ${POSTGRES_USER:usr}
+    password: ${POSTGRES_PASSWORD:pwd}
+  sql:
+    init:
+      # Property to enable DB initialization by using data.sql and schema.sql files
+      mode: always
+#      # Property to specify path for data script
+#      data-locations: data.sql
+#      # Property to specify path for schema script
+#      schema-locations: schema.sql
+
+logging:
+  pattern:
+    console: "%clr(%-5level) %white([%thread]) %cyan(%logger{36}): %msg%n"

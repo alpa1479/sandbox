@@ -43,7 +43,6 @@ public class AbstractBookWithReferencesResultSetExtractor {
                 resultSet.getLong("author_id"),
                 resultSet.getString("author_name")
         );
-        author.setBook(book);
         book.setAuthor(author);
     }
 
@@ -56,7 +55,7 @@ public class AbstractBookWithReferencesResultSetExtractor {
             );
             commentMap.put(commentId, comment);
             comment.setBook(book);
-            book.addComment(comment);
+            addCommentIfMissing(book, comment);
         }
     }
 
@@ -69,13 +68,31 @@ public class AbstractBookWithReferencesResultSetExtractor {
                     resultSet.getString("genre_name")
             );
             genreMap.put(genreId, genre);
-            genre.addBook(book);
-            book.addGenre(genre);
         }
+        addGenreIfMissing(book, genre);
+    }
 
-        if (!book.hasGenre(genre)) {
-            genre.addBook(book);
-            book.addGenre(genre);
+    private void addCommentIfMissing(Book book, Comment comment) {
+        var comments = book.getComments();
+
+        var notContains = comments
+                .stream()
+                .noneMatch(c -> c.getId() != null && c.getId().equals(comment.getId()));
+
+        if (notContains) {
+            comments.add(comment);
+        }
+    }
+
+    private void addGenreIfMissing(Book book, Genre genre) {
+        var genres = book.getGenres();
+
+        var notContains = genres
+                .stream()
+                .noneMatch(g -> g.getId() != null && g.getId().equals(genre.getId()));
+
+        if (notContains) {
+            genres.add(genre);
         }
     }
 }

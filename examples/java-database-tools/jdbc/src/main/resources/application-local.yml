@@ -1,0 +1,15 @@
+logging:
+  level:
+    # Driver loggers
+    org.postgresql.Driver: DEBUG
+    #    org.postgresql.ds.common.BaseDataSource: DEBUG
+    #    org.postgresql.core.v3.QueryExecutorImpl: TRACE
+
+    # Log4JDBC-Remix loggers
+    jdbc.audit: error
+    jdbc.resultset: error
+    jdbc.sqltiming: error
+    jdbc.connection: error
+    log4jdbc.debug: trace
+    jdbc.resultsettable: trace
+    jdbc.sqlonly: info

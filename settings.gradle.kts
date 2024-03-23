@@ -10,6 +10,7 @@ pluginManagement {
     }
 }
 
+include("examples:java-database-tools-starter")
 include("examples:java-database-tools:jdbc")
 include("examples:java-database-tools:spring-jdbc")
 include("examples:java-database-tools:hibernate")

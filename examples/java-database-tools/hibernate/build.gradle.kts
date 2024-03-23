@@ -1,12 +1,11 @@
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-json")
-    implementation("org.springframework.shell:spring-shell-starter")
-
-    implementation("org.flywaydb:flyway-core")
+    implementation(project(":examples:java-database-tools-starter"))
     implementation("org.hibernate.orm:hibernate-core")
-    implementation("org.postgresql:postgresql")
     implementation("p6spy:p6spy")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+
+    compileOnly("org.mapstruct:mapstruct")
+    annotationProcessor("org.mapstruct:mapstruct-processor")
 }

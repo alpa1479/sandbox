@@ -5,13 +5,13 @@ import org.jooq.meta.jaxb.Target
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jooq")
-    implementation("org.springframework.boot:spring-boot-starter-json")
-    implementation("org.springframework.shell:spring-shell-starter")
-
-    implementation("org.postgresql:postgresql")
+    implementation(project(":examples:java-database-tools-starter"))
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+
+    compileOnly("org.mapstruct:mapstruct")
+    annotationProcessor("org.mapstruct:mapstruct-processor")
 }
 
 buildscript {
